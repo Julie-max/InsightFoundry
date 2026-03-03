@@ -8,16 +8,17 @@
 ---
 
 ## Project Structure
+
+```
 InsightFoundry/
 │
-├── data/ Raw dataset (CSV)
-├── notebooks/ EDA + KPI notebooks
-├── sql/ SQL solutions + pattern log
-├── ds/ DSA solutions
-├── bi/ Power BI dashboard files (.pbix)
-└── presentations/ CEO summary material
-
----
+├── data/           Raw dataset (CSV)
+├── notebooks/      EDA + KPI notebooks
+├── sql/            SQL solutions + pattern log
+├── ds/             DSA solutions
+├── bi/             Power BI dashboard files (.pbix)
+└── presentations/  CEO summary material
+```
 
 ## KPIs Targeted
 - Total Revenue
