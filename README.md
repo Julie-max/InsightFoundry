@@ -8,7 +8,14 @@
 ---
 
 ## Project Structure
-/data -> Raw dataset (CSV) /notebooks -> EDA + KPI notebooks /sql -> SQL solutions + pattern log /ds -> DSA solutions /bi -> Power BI files (.pbix) /presentations -> CEO summary material
+InsightFoundry/
+│
+├── data/ Raw dataset (CSV)
+├── notebooks/ EDA + KPI notebooks
+├── sql/ SQL solutions + pattern log
+├── ds/ DSA solutions
+├── bi/ Power BI dashboard files (.pbix)
+└── presentations/ CEO summary material
 
 ---
 
