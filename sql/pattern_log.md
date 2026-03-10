@@ -119,3 +119,26 @@ Used to replace NULL values with a default value.
 Example query:
 
 SELECT IFNULL(value, 0);
+
+---
+
+## Pattern 11 — Weighted Average
+
+Used when calculating an average where each value has a weight.
+
+Formula:
+
+SUM(value * weight) / SUM(weight)
+
+Example use cases:
+- Average selling price
+- Revenue per unit
+- Weighted ratings
+
+Example query:
+
+SELECT 
+    product_id,
+    SUM(price * units) / SUM(units) AS weighted_average
+FROM sales
+GROUP BY product_id;
