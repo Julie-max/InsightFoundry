@@ -186,3 +186,35 @@ SELECT contest_id,
 FROM Register
 GROUP BY contest_id;
 ```
+
+---
+
+## Pattern 13 — Conditional Aggregation
+
+Used to compute counts or percentages based on a condition inside grouped data.
+
+Idea:
+Convert a boolean condition into numeric values (1 or 0) and aggregate.
+
+Common formulas:
+
+SUM(condition)
+
+or
+
+SUM(CASE WHEN condition THEN 1 ELSE 0 END)
+
+Example use cases:
+- Percentage of failed queries
+- Conversion rates
+- Error rates
+- Success ratios
+
+Example query:
+
+```sql
+SELECT query_name,
+       ROUND((SUM(rating < 3) / COUNT(*)) * 100, 2) AS poor_query_percentage
+FROM Queries
+GROUP BY query_name;
+```
