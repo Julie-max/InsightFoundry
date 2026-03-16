@@ -218,3 +218,117 @@ SELECT query_name,
 FROM Queries
 GROUP BY query_name;
 ```
+
+---
+
+## Pattern 14 — Selecting First Row per Group
+
+Used when we need to select the earliest (or latest) record for each entity.
+
+Common analytics examples:
+- first purchase per customer
+- first login per user
+- earliest transaction
+- latest event
+
+This pattern appeared in the **Immediate Food Delivery II** problem.
+
+
+### Approach 1 — Correlated Subquery
+
+Filters rows by comparing them with an aggregate value computed for the same group.
+
+Example query:
+
+```sql
+SELECT *
+FROM Delivery d
+WHERE d.order_date = (
+    SELECT MIN(order_date)
+    FROM Delivery
+    WHERE customer_id = d.customer_id
+);
+```
+
+Concept:
+
+For each row, check if the order date equals the earliest order date for that customer.
+
+Pros:
+- Easy to understand.
+
+Cons:
+- Subquery may run once per row.
+- Can be slower on large datasets.
+
+
+### Approach 2 — Tuple Comparison with IN
+
+Compute the grouped result first and filter rows using tuple matching.
+
+Example query:
+
+```sql
+SELECT *
+FROM Delivery
+WHERE (customer_id, order_date) IN (
+    SELECT customer_id, MIN(order_date)
+    FROM Delivery
+    GROUP BY customer_id
+);
+```
+
+Concept:
+
+Create a set of `(customer_id, first_order_date)` pairs and keep rows that match.
+
+Pros:
+- Subquery runs once.
+- More efficient than correlated subqueries.
+
+Cons:
+- Slightly less explicit logic.
+
+
+### Approach 3 — JOIN with Aggregated Result (Preferred)
+
+Create a derived table containing the first record per group and join it back to the original table.
+
+Example query:
+
+```sql
+SELECT *
+FROM Delivery d
+JOIN (
+    SELECT customer_id, MIN(order_date) AS first_order
+    FROM Delivery
+    GROUP BY customer_id
+) f
+ON d.customer_id = f.customer_id
+AND d.order_date = f.first_order;
+```
+
+Concept:
+
+1. Compute earliest order per customer.
+2. Join it with the main table to retrieve the correct rows.
+
+Pros:
+- Clear logic.
+- Efficient execution.
+- Easy to extend with additional columns.
+
+This is the **preferred approach in most production SQL queries**.
+
+
+### Key Insight
+
+Many SQL problems reduce to:
+
+```
+Find earliest or latest row per group
+```
+
+Understanding these three approaches allows solving many analytics queries efficiently.
+
+---
