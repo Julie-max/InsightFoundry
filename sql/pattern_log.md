@@ -332,3 +332,39 @@ Find earliest or latest row per group
 Understanding these three approaches allows solving many analytics queries efficiently.
 
 ---
+
+## Pattern 15 — First Event + Next Event Check
+
+Used to identify entities where an initial event is followed by another event with a specific time condition (e.g., next day login).
+
+Idea:
+First compute the initial event per entity, then check if a related event exists by comparing rows within the same table.
+
+Common steps:
+
+1. Get first event per entity using aggregation
+2. Compare with other rows using a join (same table)
+3. Filter based on time condition (e.g., +1 day)
+4. Count distinct entities if needed
+
+Example use cases:
+- Users who return the next day
+- Repeat purchases within 24 hours
+- Consecutive activity tracking
+- Retention analysis
+
+Example query:
+
+```sql
+SELECT ROUND(COUNT(DISTINCT a2.player_id) * 1.0 / COUNT(DISTINCT a1.player_id), 2) AS fraction
+FROM (
+    SELECT player_id, MIN(event_date) AS first_login
+    FROM Activity
+    GROUP BY player_id
+) a1
+LEFT JOIN Activity a2
+ON a1.player_id = a2.player_id
+AND a2.event_date = DATE_ADD(a1.first_login, INTERVAL 1 DAY);
+```
+
+---
