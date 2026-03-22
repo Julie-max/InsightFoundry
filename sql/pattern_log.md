@@ -368,3 +368,35 @@ AND a2.event_date = DATE_ADD(a1.first_login, INTERVAL 1 DAY);
 ```
 
 ---
+
+## Pattern 16 — First/Minimum per Group (Join Back)
+
+Used when you need to retrieve the full row corresponding to a minimum (or maximum) value within each group.
+
+Idea:
+First compute the minimum (or maximum) value per group using GROUP BY, then join this result back to the original table to retrieve the full row.
+
+Why this pattern is needed:
+GROUP BY collapses rows and only returns aggregated values, so we lose access to other columns. To retrieve full row details (like quantity, price), we must join back with the original table.
+
+Common use cases:
+- First sale per product
+- Earliest login per user
+- Cheapest product per category
+- Latest transaction per account
+
+Example query:
+
+```sql
+SELECT t1.*
+FROM table t1
+JOIN (
+    SELECT group_col, MIN(value_col) AS min_val
+    FROM table
+    GROUP BY group_col
+) t2
+ON t1.group_col = t2.group_col 
+AND t1.value_col = t2.min_val;
+```
+
+---
