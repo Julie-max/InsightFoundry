@@ -1,47 +1,109 @@
-# Retail BI + SQL Growth Project
+# 📊 InsightFoundry — Retail BI + AI (RAG) Project
 
-## Objective (3 Weeks)
-- Become SQL fluent and interview ready
-- Build 1 clean business KPI dashboard (Power BI)
-- Maintain DSA sharpness
+## 🚀 Overview
+
+InsightFoundry is a data analytics and AI project focused on extracting business insights from retail data and transforming them into:
+
+- 📈 Clear, decision-driven dashboards (Power BI)
+- 🧠 Structured analytical insights
+- 🤖 AI-ready knowledge (RAG pipeline)
+
+This project combines **SQL, Data Analysis, Business Intelligence, and AI concepts** into a single end-to-end workflow.
 
 ---
 
-## Project Structure
+## 🎯 Objectives
+
+- Develop strong SQL problem-solving skills (LeetCode SQL 50)
+- Build a business-focused BI dashboard
+- Practice DSA alongside data work
+- Structure insights for AI-based retrieval (RAG)
+
+---
+
+## 🧱 Project Structure
 
 ```
 InsightFoundry/
 │
-├── data/           Raw dataset (CSV)
-├── notebooks/      EDA + KPI notebooks
-├── sql/            SQL solutions + pattern log
-├── ds/             DSA solutions
-├── bi/             Power BI dashboard files (.pbix)
-└── presentations/  CEO summary material
+├── data/ Raw dataset (CSV)
+├── notebooks/ KPI analysis + investigations
+├── sql/ SQL solutions + pattern log
+├── ds/ DSA solutions
+├── bi/ Power BI dashboard (.pbix)
+├── logs/ Daily progress logs
+└── presentations/ Business summary material
 ```
 
-## KPIs Targeted
-- Total Revenue
-- Monthly Revenue
-- MoM Growth %
-- Top Products
-- Revenue by Region
+---
+
+## 📊 BI Dashboard — Key Features
+
+The Power BI dashboard focuses on **business storytelling**, not just visualization.
+
+### Key Insights Developed:
+- Revenue and Profit trends over time
+- Category-level performance analysis
+- Furniture profitability breakdown
+- Discount impact on margins
+- March 2014 anomaly investigation
 
 ---
 
-## Daily Workflow
-1. SQL (1 hr)
-2. DSA (1 hr)
-3. Pandas / BI work (4 hrs combined)
-4. Commit daily
+## 🔍 Example Insight
+
+> March 2014 shows high revenue driven by Technology sales, but overall profitability drops due to losses in the Furniture category. The issue is primarily driven by product mix rather than discounting.
 
 ---
 
-## Final Deliverable
-A Power BI dashboard that:
-- Cleans data
-- Computes KPIs
-- Shows trends clearly
-- Explains insights simply
+## 🧠 AI Component (RAG Preparation)
 
-No overengineering. Just clarity.
+Insights from the notebook are structured into **RAG-ready chunks**, enabling future integration with LLM-based systems.
+
+Example:
+March 2014 shows high revenue driven by Technology sales, but overall profitability is reduced due to losses in the Furniture category. The anomaly is mainly due to an unfavorable product mix.
+
+
+---
+
+## 🧠 SQL Learning
+
+- Solving **LeetCode SQL Top 50**
+- Maintaining a **Pattern Log** for reusable query structures
+
+### Example Pattern:
+**First/Minimum per Group (Join Back)**  
+Used to retrieve full rows corresponding to aggregated values.
+
+---
+
+## 💻 DSA Practice
+
+- Focus on problem-solving patterns (Binary Search, etc.)
+- Implementations stored in `/ds`
+
+---
+
+## 📘 Workflow
+
+Each day follows:
+
+1. DSA (problem solving)
+2. SQL (pattern-based learning)
+3. BI / Analysis (notebooks + dashboard)
+4. Logging progress
+
+---
+
+## 🔥 Key Learnings
+
+- Business insights must be **data-backed, not assumed**
+- Visualization should support a **clear narrative**
+- SQL patterns are reusable building blocks
+- AI systems require **structured knowledge, not raw data**
+
+---
+
+## 💡 Philosophy
+
+No overengineering. Just clarity, correctness, and insight.
