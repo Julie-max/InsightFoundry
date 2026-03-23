@@ -400,3 +400,70 @@ AND t1.value_col = t2.min_val;
 ```
 
 ---
+
+## Pattern 17 — Aggregation + Outer Query (2-Step Pattern)
+
+Used when a problem requires:
+- filtering based on aggregated values
+- AND then applying further operations (like MAX, sorting, or selection)
+
+Idea:
+Break the problem into two steps:
+1. Inner query → compute grouped/filtered results
+2. Outer query → apply final operation on the result set
+
+Why this pattern is needed:
+Complex queries often cannot be solved in a single step, especially when aggregation results need further processing. Separating logic improves clarity and correctness.
+
+Common use cases:
+- Find max/min among filtered groups
+- Rank or sort aggregated results
+- Apply additional filtering after aggregation
+
+Example:
+
+```sql
+SELECT MAX(num)
+FROM (
+    SELECT num
+    FROM MyNumbers
+    GROUP BY num
+    HAVING COUNT(*) = 1
+) t;
+```
+
+---
+
+# 📘 Pattern 18 — Safe Aggregation for Empty Results
+
+```markdown
+## Pattern 18 — Safe Aggregation for Empty Results (MAX/MIN Wrapper)
+
+Used when a query may return no rows, but the problem requires a single value (e.g., NULL instead of empty result).
+
+Idea:
+Wrap the result in an aggregate function like MAX() or MIN() so that:
+- If rows exist → returns correct value
+- If no rows exist → returns NULL automatically
+
+Why this pattern is needed:
+Some queries return empty result sets, but problems may expect a scalar output. Aggregate functions ensure safe output handling.
+
+Common use cases:
+- Largest/smallest value queries
+- Conditional queries with possible no results
+- Avoiding empty result outputs
+
+Example:
+
+```sql
+SELECT MAX(num) AS num
+FROM (
+    SELECT num
+    FROM MyNumbers
+    GROUP BY num
+    HAVING COUNT(*) = 1
+) t;
+```
+
+---
